@@ -39,11 +39,32 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer
-      :fixed="fixed"
-      app
-    >
-      <span>&copy; 2019</span>
+    <v-footer color="#00d1b2" height="auto" style="padding: 10px;">
+      <v-layout row wrap justify-center>
+        <v-layout row wrap>
+          <v-flex xs12 sm6>
+            <v-card-text class="white--text pt-0">
+              本ブログは naoki85 によってメンテナンスされています。<br>
+              Twitter などでご意見いただけると嬉しいです。<br>
+            </v-card-text>
+          </v-flex>
+          <v-flex xs12 sm6 class="text-xs-center">
+            <v-btn
+              v-for="(link, i) in links"
+              :to="link.path"
+              :key="i"
+              color="white"
+              flat
+            >
+              <v-icon size="36px">{{ link.icon }}</v-icon>
+            </v-btn>
+          </v-flex>
+        </v-layout>
+
+        <v-card-text class="white--text text-xs-center">
+          &copy;2018 — <strong>naoki85</strong> — All Rights eserved.
+        </v-card-text>
+      </v-layout>
     </v-footer>
   </v-app>
 </template>
@@ -60,6 +81,12 @@ export default {
           icon: 'home',
           title: 'Home',
           to: '/'
+        }
+      ],
+      links: [
+        {
+          icon: 'fab fa-twitter',
+          path: 'https://twitter.com/naoki85_201612'
         }
       ],
       title: 'naoki85 のブログ'
