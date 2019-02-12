@@ -11,7 +11,7 @@
       <Logo />
       <v-layout row wrap>
         <v-flex>
-          <v-card v-for="i in 6" :key="i" to="/inspire">
+          <v-card v-for="i in 6" :key="i" to="/show">
             <v-layout>
               <v-flex xs12>
                 <v-img
