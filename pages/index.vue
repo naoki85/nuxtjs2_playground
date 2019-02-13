@@ -8,14 +8,13 @@
       sm10
       md8
     >
-      <Logo />
       <v-layout row wrap>
         <v-flex>
-          <v-card v-for="i in 6" :key="i" to="/show">
+          <v-card v-for="(post, i) in posts" :key="i" to="/show">
             <v-layout>
               <v-flex xs12>
                 <v-img
-                  src="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
+                  src="http://localhost:3000/v.png"
                   height="125px"
                   contain
                 ></v-img>
@@ -23,9 +22,8 @@
               <v-flex xs7>
                 <v-card-title primary-title>
                   <div>
-                    <div class="headline">Supermodel</div>
-                    <div>Foster the People</div>
-                    <div>(2014)</div>
+                    <div class="headline">{{ post.Title }}</div>
+                    <div>{{ post.PublishedAt }}</div>
                   </div>
                 </v-card-title>
               </v-flex>
@@ -38,11 +36,27 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Request from '~/assets/javascript/request.js'
 
 export default {
-  components: {
-    Logo
+  data: function() {
+    return {
+      posts: []
+    }
+  },
+  mounted: function() {
+    this.fetchPosts()
+  },
+  methods: {
+    fetchPosts: function() {
+      Request.get('/posts', {})
+        .then(response => {
+          this.posts = response.data.Posts
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   }
 }
 </script>
