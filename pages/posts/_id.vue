@@ -19,6 +19,10 @@ export default {
         published_at: '2019-02-12'
       }
     }
+  },
+  mounted: function() {
+    const postId = this.$route.params.id
+    this.content = this.content + postId
   }
 }
 </script>

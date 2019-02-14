@@ -10,7 +10,7 @@
     >
       <v-layout row wrap>
         <v-flex>
-          <v-card v-for="(post, i) in posts" :key="i" to="/show">
+          <v-card v-for="(post, i) in posts" :key="i" :to="`/posts/${post.ID}`">
             <v-layout>
               <v-flex xs12>
                 <v-img
