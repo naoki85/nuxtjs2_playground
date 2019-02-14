@@ -1,28 +1,43 @@
 <template>
   <v-container fluid>
-    <div class="body-1 grey--text">{{ post.published_at }}</div>
-    <div class="display-1">{{ post.title }}</div>
+    <div class="body-1 grey--text">{{ post.PublishedAt }}</div>
+    <div class="display-1">{{ post.Title }}</div>
 
     <v-layout row wrap>
-      {{ post.content }}
+      {{ post.Content }}
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import Request from '~/assets/javascript/request.js'
+
 export default {
+  validate({ params }) {
+    return /^\d+$/.test(params.id)
+  },
   data: function() {
     return {
-      post: {
-        title: 'hogehoge',
-        content: 'fugafuga',
-        published_at: '2019-02-12'
-      }
+      post: {}
     }
   },
   mounted: function() {
     const postId = this.$route.params.id
-    this.content = this.content + postId
+    this.fetchPost(postId)
+  },
+  methods: {
+    fetchPost: function(postId) {
+      Request.get('/posts/' + postId, {})
+        .then(response => {
+          this.post = response.data
+        })
+        .catch(error => {
+          return this.$nuxt.error({
+            statusCode: error.response.status,
+            message: error.response.message
+          })
+        })
+    }
   }
 }
 </script>
