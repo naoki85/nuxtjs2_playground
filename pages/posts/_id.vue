@@ -3,14 +3,15 @@
     <div class="body-1 grey--text">{{ post.PublishedAt }}</div>
     <div class="display-1">{{ post.Title }}</div>
 
-    <v-layout row wrap>
-      {{ post.Content }}
+    <v-layout row wrap class="preview-area">
+      <div v-html="convertMarkdownToHtml"></div>
     </v-layout>
   </v-container>
 </template>
 
 <script>
 import Request from '~/assets/javascript/request.js'
+import extMarked from '~/assets/javascript/extMarked.js'
 
 export default {
   validate({ params }) {
@@ -19,6 +20,11 @@ export default {
   data: function() {
     return {
       post: {}
+    }
+  },
+  computed: {
+    convertMarkdownToHtml: function() {
+      return extMarked.convertToHtml(this.post.Content)
     }
   },
   mounted: function() {
