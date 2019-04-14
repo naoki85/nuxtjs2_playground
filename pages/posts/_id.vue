@@ -1,10 +1,14 @@
 <template>
   <v-container fluid>
-    <div class="body-1 grey--text">{{ post.PublishedAt }}</div>
-    <div class="display-1">{{ post.Title }}</div>
+    <div class="body-1 grey--text">
+      {{ post.published_at }}
+    </div>
+    <div class="display-1">
+      {{ post.title }}
+    </div>
 
     <v-layout row wrap class="preview-area">
-      <div v-html="convertMarkdownToHtml"></div>
+      <div v-html="convertMarkdownToHtml" />
     </v-layout>
   </v-container>
 </template>
@@ -24,7 +28,7 @@ export default {
   },
   computed: {
     convertMarkdownToHtml: function() {
-      return extMarked.convertToHtml(this.post.Content)
+      return extMarked.convertToHtml(this.post.content)
     }
   },
   mounted: function() {
@@ -33,9 +37,9 @@ export default {
   },
   methods: {
     fetchPost: function(postId) {
-      Request.get('/posts/' + postId, {})
+      Request.get('/v1/posts/' + postId, {})
         .then(response => {
-          this.post = response.data
+          this.post = response.data.post
         })
         .catch(error => {
           return this.$nuxt.error({

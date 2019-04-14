@@ -1,11 +1,11 @@
+const environment = process.env.NODE_ENV || 'development'
+const envSet = require(`./env.${environment}.js`)
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const pkg = require('./package')
 
 module.exports = {
   mode: 'spa',
-  env: {
-    apiBaseUrl: process.env.apiBaseUrl || 'http://localhost:8080'
-  },
+  env: envSet,
 
   /*
   ** Headers of the page

@@ -16,11 +16,12 @@
       />
       <v-layout row wrap>
         <v-flex>
-          <v-card v-for="(post, i) in posts" :key="i" :to="`/posts/${post.ID}`">
+          <v-card v-for="(post, i) in posts" :key="i" :to="`/posts/${post.id}`">
             <v-layout>
               <v-flex xs12>
                 <v-img
-                  src="http://localhost:3000/v.png"
+                  :src="post.post_image_path"
+                  :alt="post.title"
                   height="125px"
                   contain
                 />
@@ -29,10 +30,10 @@
                 <v-card-title primary-title>
                   <div>
                     <div class="headline">
-                      {{ post.Title }}
+                      {{ post.title }}
                     </div>
                     <div>
-                      {{ post.PublishedAt }}
+                      {{ post.published_at }}
                     </div>
                   </div>
                 </v-card-title>
@@ -77,11 +78,11 @@ export default {
   methods: {
     fetchPosts: function(page) {
       const requestPage = page === undefined ? 1 : page
-      Request.get('/posts?page=' + requestPage, {})
+      Request.get('/v1/posts?page=' + requestPage, {})
         .then(response => {
           // TODO: totalPage が応答されるようになったらそれをセットする
-          this.totalPage = 5
-          this.posts = response.data.Posts
+          this.totalPage = response.data.total_page
+          this.posts = response.data.posts
           this.page = page
         })
         .catch(error => {
