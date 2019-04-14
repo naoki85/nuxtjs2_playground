@@ -1,7 +1,7 @@
 <template>
   <v-layout justify-center align-center>
     <v-flex xs12 sm10 md8>
-      <v-paginate
+      <VPaginate
         ref="paginate"
         :current-page="page"
         :total-page="totalPage"
@@ -35,7 +35,7 @@
           </v-card>
         </v-flex>
       </v-layout>
-      <v-paginate
+      <VPaginate
         ref="paginate"
         :current-page="page"
         :total-page="totalPage"
@@ -45,43 +45,40 @@
   </v-layout>
 </template>
 
-<script>
+<script lang="ts">
 import Request from '~/assets/javascript/request.js'
-import Paginate from '~/components/paginate'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 
-export default {
+@Component({
   components: {
-    'v-paginate': Paginate
-  },
-  data: function() {
-    return {
-      posts: [],
-      totalPage: 0,
-      page: 1
-    }
-  },
-  watch: {
-    page: function() {
-      this.$refs.paginate.updateCurrent(this.page)
-    }
-  },
-  mounted: function() {
+    VPaginate: () => import('~/components/paginate.vue')
+  }
+})
+export default class IndexPage extends Vue {
+  posts: Post[] = []
+  totalPage: number = 0
+  page: number = 1
+
+  @Watch('page')
+  public page(): void {
+    this.$refs.paginate.updateCurrent(this.page)
+  }
+
+  public mounted(): void {
     this.fetchPosts()
-  },
-  methods: {
-    fetchPosts: function(page) {
-      const requestPage = page === undefined ? 1 : page
-      Request.get('/v1/posts?page=' + requestPage, {})
-        .then(response => {
-          // TODO: totalPage が応答されるようになったらそれをセットする
-          this.totalPage = response.data.total_page
-          this.posts = response.data.posts
-          this.page = page
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    }
+  }
+
+  public fetchPosts(page): void {
+    const requestPage = page === undefined ? 1 : page
+    Request.get('/v1/posts?page=' + requestPage, {})
+      .then(response => {
+        this.totalPage = response.data.total_page
+        this.posts = response.data.posts
+        this.page = page
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 }
 </script>
