@@ -1,11 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      v-model="drawer"
-      :clipped="clipped"
-      fixed
-      app
-    >
+    <v-navigation-drawer v-model="drawer" :clipped="clipped" fixed app>
       <v-list>
         <v-list-tile
           v-for="(item, i) in items"
@@ -43,19 +38,21 @@
         <v-layout row wrap>
           <v-flex xs12 sm6>
             <v-card-text class="white--text pt-0">
-              本ブログは naoki85 によってメンテナンスされています。<br>
-              Twitter などでご意見いただけると嬉しいです。<br>
+              本ブログは naoki85 によってメンテナンスされています。<br />
+              Twitter などでご意見いただけると嬉しいです。<br />
             </v-card-text>
           </v-flex>
           <v-flex xs12 sm6 class="text-xs-center">
             <v-btn
               v-for="(link, i) in links"
-              :to="link.path"
               :key="i"
+              :to="link.path"
               color="white"
               flat
             >
-              <v-icon size="36px">{{ link.icon }}</v-icon>
+              <v-icon size="36px">
+                {{ link.icon }}
+              </v-icon>
             </v-btn>
           </v-flex>
         </v-layout>

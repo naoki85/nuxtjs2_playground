@@ -2,7 +2,7 @@
   <div v-if="totalPage > 0" class="text-xs-center">
     <ul class="paginate">
       <li @click="emitClickPage(currentPage - 1)">
-        <i class="fas fa-chevron-left"></i>
+        <i class="fas fa-chevron-left" />
       </li>
       <li
         v-for="page in displayPages"
@@ -12,7 +12,9 @@
       >
         {{ page }}
       </li>
-      <li @click="emitClickPage(currentPage + 1)"><i class="fas fa-chevron-right"></i></li>
+      <li @click="emitClickPage(currentPage + 1)">
+        <i class="fas fa-chevron-right" />
+      </li>
     </ul>
   </div>
 </template>

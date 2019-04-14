@@ -1,13 +1,6 @@
 <template>
-  <v-layout
-    justify-center
-    align-center
-  >
-    <v-flex
-      xs12
-      sm10
-      md8
-    >
+  <v-layout justify-center align-center>
+    <v-flex xs12 sm10 md8>
       <v-paginate
         ref="paginate"
         :current-page="page"
