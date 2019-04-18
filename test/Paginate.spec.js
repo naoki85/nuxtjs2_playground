@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils'
-import Logo from '@/components/Logo.vue'
+import Paginate from '@/components/paginate.vue'
 
-describe('Logo', () => {
+describe('Paginate', () => {
   test('is a Vue instance', () => {
-    const wrapper = mount(Logo)
+    const wrapper = mount(Paginate)
     expect(wrapper.isVueInstance()).toBeTruthy()
   })
 })

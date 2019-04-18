@@ -13,41 +13,40 @@
   </v-container>
 </template>
 
-<script>
+<script lang="ts">
 import Request from '~/assets/javascript/request.js'
 import extMarked from '~/assets/javascript/extMarked.js'
+import { Component, Vue } from 'vue-property-decorator'
+// import Post from '~/models/Post'
 
-export default {
-  validate({ params }) {
+@Component({
+  validate({ params }): boolean {
     return /^\d+$/.test(params.id)
-  },
-  data: function() {
-    return {
-      post: {}
-    }
-  },
-  computed: {
-    convertMarkdownToHtml: function() {
-      return extMarked.convertToHtml(this.post.content)
-    }
-  },
-  mounted: function() {
+  }
+})
+export default class PostShowPage extends Vue {
+  post: Post = {}
+
+  public mounted(): void {
     const postId = this.$route.params.id
     this.fetchPost(postId)
-  },
-  methods: {
-    fetchPost: function(postId) {
-      Request.get('/v1/posts/' + postId, {})
-        .then(response => {
-          this.post = response.data.post
+  }
+
+  public get convertMarkdownToHtml(): string {
+    return extMarked.convertToHtml(this.post.content)
+  }
+
+  public fetchPost(postId): void {
+    Request.get('/v1/posts/' + postId, {})
+      .then(response => {
+        this.post = response.data.post
+      })
+      .catch(error => {
+        return this.$nuxt.error({
+          statusCode: error.response.status,
+          message: error.response.message
         })
-        .catch(error => {
-          return this.$nuxt.error({
-            statusCode: error.response.status,
-            message: error.response.message
-          })
-        })
-    }
+      })
   }
 }
 </script>
