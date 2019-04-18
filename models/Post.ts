@@ -1,5 +1,5 @@
 export default Post {
-  id: number
+  id: string
   title: string
   content: string
   image_url: string

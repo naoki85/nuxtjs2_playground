@@ -48,6 +48,7 @@
 <script lang="ts">
 import Request from '~/assets/javascript/request.js'
 import { Component, Vue, Watch } from 'vue-property-decorator'
+// import Post from '~/models/Post'
 
 @Component({
   components: {
