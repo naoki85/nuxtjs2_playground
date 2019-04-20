@@ -46,3 +46,12 @@ export default class PostShowPage extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.siimple-h1 {
+  font-size: 34px;
+}
+.preview-area {
+  width: 100%;
+}
+</style>

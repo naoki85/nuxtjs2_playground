@@ -88,3 +88,32 @@ export default class IndexPage extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.siimple-box {
+  margin-bottom: 0;
+  background-color: white;
+}
+.siimple-box-title {
+  font-size: 24px;
+  color: #000000;
+}
+.siimple-box-title:hover {
+  text-decoration: underline;
+}
+.siimple-box-subtitle {
+  font-size: 13px;
+  color: #9e9e9e;
+}
+.siimple-tag-default {
+  color: white;
+}
+.siimple-box-detail {
+  opacity: 1;
+  height: 125px;
+}
+.siimple-box-detail img {
+  width: 100%;
+  height: auto;
+}
+</style>
