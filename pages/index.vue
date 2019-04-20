@@ -1,48 +1,53 @@
 <template>
-  <v-layout justify-center align-center>
-    <v-flex xs12 sm10 md8>
-      <VPaginate
-        ref="paginate"
-        :current-page="page"
-        :total-page="totalPage"
-        @click-page="fetchPosts"
-      />
-      <v-layout row wrap>
-        <v-flex>
-          <v-card v-for="(post, i) in posts" :key="i" :to="`/posts/${post.id}`">
-            <v-layout>
-              <v-flex xs12>
-                <v-img
-                  :src="post.post_image_path"
-                  :alt="post.title"
-                  height="125px"
-                  contain
-                />
-              </v-flex>
-              <v-flex xs7>
-                <v-card-title primary-title>
-                  <div>
-                    <div class="headline">
-                      {{ post.title }}
-                    </div>
-                    <div>
-                      {{ post.published_at }}
-                    </div>
+  <div>
+    <v-paginate
+      ref="paginate"
+      :current-page="page"
+      :total-page="totalPage"
+      @click-page="fetchPosts"
+    />
+    <div class="siimple-grid">
+      <div class="siimple-grid-row">
+        <div
+          class="siimple-box siimple-grid-col siimple-grid-col--6 siimple-grid-col--md-12"
+          v-for="post in posts"
+          :key="post.id"
+        >
+          <router-link :to="'/posts/' + post.id">
+            <div class="siimple-grid">
+              <div class="siimple-grid-row">
+                <div class="siimple-grid-col siimple-grid-col--8">
+                  <div class="siimple-box-subtitle">
+                    {{ post.published_at }}
+                    <span
+                      class="siimple-tag siimple-tag-default siimple-tag--rounded"
+                      :style="{ backgroundColor: post.post_category.color }"
+                    >
+                      {{ post.post_category.name }}
+                    </span>
                   </div>
-                </v-card-title>
-              </v-flex>
-            </v-layout>
-          </v-card>
-        </v-flex>
-      </v-layout>
-      <VPaginate
-        ref="paginate"
-        :current-page="page"
-        :total-page="totalPage"
-        @click-page="fetchPosts"
-      />
-    </v-flex>
-  </v-layout>
+                  <div class="siimple-box-title box-title">
+                    {{ post.title }}
+                  </div>
+                </div>
+                <div class="siimple-grid-col siimple-grid-col--4">
+                  <div class="siimple-box-detail">
+                    <img :src="post.post_image_path" :alt="post.title" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </router-link>
+        </div>
+      </div>
+    </div>
+    <v-paginate
+      ref="paginate"
+      :current-page="page"
+      :total-page="totalPage"
+      @click-page="fetchPosts"
+    />
+  </div>
 </template>
 
 <script lang="ts">

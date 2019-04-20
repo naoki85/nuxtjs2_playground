@@ -23,9 +23,7 @@
     "marked": "^0.6.2",
     "nuxt": "^2.6.1",
     "ts-node": "^8.0.3",
-    "vue-property-decorator": "^8.1.0",
-    "vuetify": "^1.5.11",
-    "vuetify-loader": "^1.0.8"
+    "vue-property-decorator": "^8.1.0"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",

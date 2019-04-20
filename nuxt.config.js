@@ -1,6 +1,5 @@
 const environment = process.env.NODE_ENV || 'development'
 const envSet = require(`./env.${environment}.js`)
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 const pkg = require('./package')
 
 module.exports = {
@@ -44,7 +43,7 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/vuetify'],
+  plugins: [],
 
   /*
    ** Nuxt.js modules
@@ -65,11 +64,11 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin()],
+    transpile: [],
+    plugins: [],
     loaders: {
       stylus: {
-        import: ['~assets/style/variables.styl']
+        import: []
       }
     },
 
