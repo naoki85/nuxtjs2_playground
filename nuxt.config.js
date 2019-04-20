@@ -35,6 +35,7 @@ module.exports = {
    ** Global CSS
    */
   css: [
+    'siimple/dist/siimple.css',
     '@fortawesome/fontawesome-free/css/all.css',
     '~/assets/style/app.styl',
     'highlight.js/styles/github-gist.css'
