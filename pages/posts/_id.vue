@@ -1,16 +1,12 @@
 <template>
-  <v-container fluid>
-    <div class="body-1 grey--text">
-      {{ post.published_at }}
-    </div>
-    <div class="display-1">
-      {{ post.title }}
-    </div>
+  <div>
+    <div class="body-1 grey--text">{{ post.published_at }}</div>
+    <h1 class="siimple-h1">{{ post.title }}</h1>
 
-    <v-layout row wrap class="preview-area">
-      <div v-html="convertMarkdownToHtml" />
-    </v-layout>
-  </v-container>
+    <div class="preview-area">
+      <div v-html="convertMarkdownToHtml"></div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -50,3 +46,12 @@ export default class PostShowPage extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.siimple-h1 {
+  font-size: 34px;
+}
+.preview-area {
+  width: 100%;
+}
+</style>

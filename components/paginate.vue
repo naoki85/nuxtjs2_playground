@@ -1,5 +1,5 @@
 <template>
-  <div v-if="totalPage > 0" class="text-xs-center">
+  <div v-if="totalPage > 0" class="siimple--text-center">
     <ul class="paginate">
       <li @click="emitClickPage(currentPage - 1)">
         <i class="fas fa-chevron-left" />
