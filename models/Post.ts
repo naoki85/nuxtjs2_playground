@@ -1,9 +1,12 @@
+import PostCategory from './PostCategory'
+
 interface Post {
   id: number
   title: string
   content: string
-  image_url: string
+  imageUrl: string
   publishedAt: string
+  postCategory: PostCategory
 }
 
 export default Post

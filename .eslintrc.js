@@ -19,6 +19,7 @@ module.exports = {
   rules: {
     'no-console': 'off',
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "error"
+    "@typescript-eslint/no-unused-vars": "error",
+    "vue/html-self-closing": "off"
   }
 }
