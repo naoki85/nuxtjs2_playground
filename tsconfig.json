@@ -8,7 +8,9 @@
     "paths": { "@/*": [ "./*" ], "~/*": [ "./*" ] },
     "target": "es5",
     "strict": true,
-    "module": "es2015",
-    "moduleResolution": "node"
+    "module": "esNext",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "allowJs": true
   },
 }

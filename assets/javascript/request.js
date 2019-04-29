@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default {
-  request(method, url, options) {
+  request: function(method, url, options) {
     let promise = null
     let params = {}
     let headers = {}
@@ -33,16 +33,16 @@ export default {
     })
     return promise
   },
-  get(url, options) {
+  get: function(url, options) {
     return this.request('get', url, options)
   },
-  post(url, options) {
+  post: function(url, options) {
     return this.request('post', url, options)
   },
-  patch(url, options) {
+  patch: function(url, options) {
     return this.request('patch', url, options)
   },
-  delete(url, options) {
+  delete: function(url, options) {
     return this.request('delete', url, options)
   }
 }

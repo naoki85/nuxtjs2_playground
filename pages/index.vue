@@ -51,13 +51,14 @@
 </template>
 
 <script lang="ts">
-import Request from '~/assets/javascript/request.js'
 import { Component, Vue, Watch } from 'vue-property-decorator'
-// import Post from '~/models/Post'
+import Post from '../models/Post'
+declare function require(x: string): any
+const Request = require('../assets/javascript/request.js').default
 
 @Component({
   components: {
-    VPaginate: () => import('~/components/paginate.vue')
+    VPaginate: () => import('../components/paginate.vue')
   }
 })
 export default class IndexPage extends Vue {
@@ -66,23 +67,24 @@ export default class IndexPage extends Vue {
   page: number = 1
 
   @Watch('page')
-  public page(): void {
-    this.$refs.paginate.updateCurrent(this.page)
+  public currentPage(): void {
+    const paginateRef: any = this.$refs.paginate
+    paginateRef.updateCurrent(this.page)
   }
 
   public mounted(): void {
-    this.fetchPosts()
+    this.fetchPosts(1)
   }
 
-  public fetchPosts(page): void {
+  public fetchPosts(page: number): void {
     const requestPage = page === undefined ? 1 : page
     Request.get('/v1/posts?page=' + requestPage, {})
-      .then(response => {
+      .then((response: any) => {
         this.totalPage = response.data.total_page
         this.posts = response.data.posts
         this.page = page
       })
-      .catch(error => {
+      .catch((error: any) => {
         console.log(error)
       })
   }
