@@ -9,21 +9,21 @@
     <div class="siimple-grid">
       <div class="siimple-grid-row">
         <div
-          class="siimple-box siimple-grid-col siimple-grid-col--6 siimple-grid-col--md-12"
           v-for="post in posts"
           :key="post.id"
+          class="siimple-box siimple-grid-col siimple-grid-col--6 siimple-grid-col--md-12"
         >
           <router-link :to="'/posts/' + post.id">
             <div class="siimple-grid">
               <div class="siimple-grid-row">
                 <div class="siimple-grid-col siimple-grid-col--8">
                   <div class="siimple-box-subtitle">
-                    {{ post.published_at }}
+                    {{ post.publishedAt }}
                     <span
                       class="siimple-tag siimple-tag-default siimple-tag--rounded"
-                      :style="{ backgroundColor: post.post_category.color }"
+                      :style="{ backgroundColor: post.postCategory.color }"
                     >
-                      {{ post.post_category.name }}
+                      {{ post.postCategory.name }}
                     </span>
                   </div>
                   <div class="siimple-box-title box-title">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="siimple-grid-col siimple-grid-col--4">
                   <div class="siimple-box-detail">
-                    <img :src="post.post_image_path" :alt="post.title" />
+                    <img :src="post.imageUrl" :alt="post.title" />
                   </div>
                 </div>
               </div>
@@ -51,13 +51,15 @@
 </template>
 
 <script lang="ts">
-import Request from '~/assets/javascript/request.js'
 import { Component, Vue, Watch } from 'vue-property-decorator'
-// import Post from '~/models/Post'
+import Post from '../models/Post'
+import PostCategory from '../models/PostCategory'
+declare function require(x: string): any
+const Request = require('../assets/javascript/request.js').default
 
 @Component({
   components: {
-    VPaginate: () => import('~/components/paginate.vue')
+    VPaginate: () => import('../components/paginate.vue')
   }
 })
 export default class IndexPage extends Vue {
@@ -66,23 +68,40 @@ export default class IndexPage extends Vue {
   page: number = 1
 
   @Watch('page')
-  public page(): void {
-    this.$refs.paginate.updateCurrent(this.page)
+  public currentPage(): void {
+    const paginateRef: any = this.$refs.paginate
+    paginateRef.updateCurrent(this.page)
   }
 
   public mounted(): void {
-    this.fetchPosts()
+    this.fetchPosts(1)
   }
 
-  public fetchPosts(page): void {
+  public fetchPosts(page: number): void {
     const requestPage = page === undefined ? 1 : page
-    Request.get('/v1/posts?page=' + requestPage, {})
-      .then(response => {
-        this.totalPage = response.data.total_page
-        this.posts = response.data.posts
+    Request.get('/posts?page=' + requestPage, {})
+      .then((response: any) => {
+        this.totalPage = response.data.TotalPage
         this.page = page
+        this.posts = []
+        response.data.Posts.forEach((post: any) => {
+          const newPostCategory: PostCategory = {
+            id: post.PostCategory.Id,
+            name: post.PostCategory.Name,
+            color: post.PostCategory.Color
+          }
+          const newPost: Post = {
+            id: post.Id,
+            title: post.Title,
+            content: post.Content,
+            imageUrl: post.ImageUrl,
+            publishedAt: post.PublishedAt,
+            postCategory: newPostCategory
+          }
+          this.posts.push(newPost)
+        })
       })
-      .catch(error => {
+      .catch((error: any) => {
         console.log(error)
       })
   }

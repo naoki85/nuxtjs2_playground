@@ -1,7 +1,11 @@
 <template>
   <div>
-    <div class="body-1 grey--text">{{ post.published_at }}</div>
-    <h1 class="siimple-h1">{{ post.title }}</h1>
+    <div class="body-1 grey--text">
+      {{ post.publishedAt }}
+    </div>
+    <h1 class="siimple-h1">
+      {{ post.title }}
+    </h1>
 
     <div class="preview-area">
       <div v-html="convertMarkdownToHtml"></div>
@@ -10,10 +14,11 @@
 </template>
 
 <script lang="ts">
-import Request from '~/assets/javascript/request.js'
-import extMarked from '~/assets/javascript/extMarked.js'
 import { Component, Vue } from 'vue-property-decorator'
-// import Post from '~/models/Post'
+import Post from '../../models/Post'
+declare function require(x: string): any
+const Request = require('../../assets/javascript/request.js').default
+const extMarked = require('../../assets/javascript/extMarked.js').default
 
 @Component({
   validate({ params }): boolean {
@@ -21,10 +26,17 @@ import { Component, Vue } from 'vue-property-decorator'
   }
 })
 export default class PostShowPage extends Vue {
-  post: Post = {}
+  post: Post = {
+    id: 0,
+    title: '',
+    content: '',
+    imageUrl: '',
+    publishedAt: '',
+    postCategory: { id: 0, name: '', color: '' }
+  }
 
   public mounted(): void {
-    const postId = this.$route.params.id
+    const postId = Number(this.$route.params.id)
     this.fetchPost(postId)
   }
 
@@ -32,16 +44,23 @@ export default class PostShowPage extends Vue {
     return extMarked.convertToHtml(this.post.content)
   }
 
-  public fetchPost(postId): void {
-    Request.get('/v1/posts/' + postId, {})
-      .then(response => {
-        this.post = response.data.post
+  public fetchPost(postId: number): void {
+    Request.get('/posts/' + postId, {})
+      .then((response: any) => {
+        const resPost: any = response.data
+        this.post.id = resPost.Id
+        this.post.title = resPost.Title
+        this.post.content = resPost.Content
+        this.post.publishedAt = resPost.PublishedAt
       })
-      .catch(error => {
-        return this.$nuxt.error({
-          statusCode: error.response.status,
-          message: error.response.message
-        })
+      .catch((error: any) => {
+        console.log(error)
+        // TODO: https://medium.com/@mavrickmaster/custom-error-pages-with-nuxt-js-3c70e6c51aff
+        // const nuxtApp = this.$nuxt
+        // return nuxtApp.error({
+        //   statusCode: error.response.status,
+        //   message: error.response.message
+        // })
       })
   }
 }
