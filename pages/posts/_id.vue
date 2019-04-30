@@ -1,7 +1,11 @@
 <template>
   <div>
-    <div class="body-1 grey--text">{{ post.published_at }}</div>
-    <h1 class="siimple-h1">{{ post.title }}</h1>
+    <div class="body-1 grey--text">
+      {{ post.publishedAt }}
+    </div>
+    <h1 class="siimple-h1">
+      {{ post.title }}
+    </h1>
 
     <div class="preview-area">
       <div v-html="convertMarkdownToHtml"></div>
@@ -26,7 +30,7 @@ export default class PostShowPage extends Vue {
     id: 0,
     title: '',
     content: '',
-    image_url: '',
+    imageUrl: '',
     publishedAt: ''
   }
 
@@ -40,9 +44,13 @@ export default class PostShowPage extends Vue {
   }
 
   public fetchPost(postId: number): void {
-    Request.get('/v1/posts/' + postId, {})
+    Request.get('/posts/' + postId, {})
       .then((response: any) => {
-        this.post = response.data.post
+        const resPost: Object = response.data
+        this.post.id = resPost.Id
+        this.post.title = resPost.Title
+        this.post.content = resPost.Content
+        this.post.publishedAt = resPost.PublishedAt
       })
       .catch((error: any) => {
         console.log(error)
