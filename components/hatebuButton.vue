@@ -12,9 +12,9 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class HatebuButton extends Vue {
   @Prop()
-  public text?: string
+  public text: string
   @Prop()
-  public path?: string
+  public path: string
 
   public bookmark(): void {
     const text = this.text

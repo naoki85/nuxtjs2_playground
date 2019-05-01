@@ -29,13 +29,13 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import recommendedBook from '../models/RecommendedBook'
+import RecommendedBook from '../models/RecommendedBook'
 declare function require(x: string): any
 const Request = require('../assets/javascript/request.js').default
 
 @Component
 export default class RecommendBooks extends Vue {
-  recommendedBooks: recommendedBook[] = []
+  recommendedBooks: RecommendedBook[] = []
 
   public mounted(): void {
     this.fetchRecommededBooks()
