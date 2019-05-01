@@ -1,6 +1,8 @@
 const environment = process.env.NODE_ENV || 'development'
 const envSet = require(`./env.${environment}.js`)
 const pkg = require('./package')
+const appName = 'naoki85 のブログ'
+const appDescription = 'ブログ一覧'
 
 module.exports = {
   mode: 'spa',
@@ -14,7 +16,13 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: appDescription },
+      { hid: 'og:site_name', property: 'og:site_name', content: appName },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:url', property: 'og:url', content: 'https://naoki85.me' },
+      { hid: 'og:title', property: 'og:title', content: 'ブログ一覧' },
+      { hid: 'og:description', property: 'og:description', content: appDescription },
+      { hid: 'og:image', property: 'og:image', href: '/favicon.ico' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
