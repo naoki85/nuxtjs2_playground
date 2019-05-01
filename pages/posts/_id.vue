@@ -51,6 +51,34 @@ export default class PostShowPage extends Vue {
   }
   path: string = ''
 
+  public head() {
+    return {
+      title: '記事詳細ページ',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: '記事の詳細です'
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: '記事詳細ページ'
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: '記事の詳細です'
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          href: '/favicon.ico'
+        }
+      ]
+    }
+  }
+
   public mounted(): void {
     this.path = this.$route.path
     const postId = Number(this.$route.params.id)

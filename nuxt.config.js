@@ -5,7 +5,7 @@ const appName = 'naoki85 のブログ'
 const appDescription = '本ブログは naoki85 によりメンテナンスされているサイトです。主に本の紹介や勉強したことをブログにまとめていきます。'
 
 module.exports = {
-  mode: 'spa',
+  mode: 'universal',
   env: envSet,
 
   /*
