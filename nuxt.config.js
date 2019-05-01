@@ -1,6 +1,6 @@
 const environment = process.env.NODE_ENV || 'development'
 const envSet = require(`./env.${environment}.js`)
-const pkg = require('./package')
+// const pkg = require('./package')
 const appName = 'naoki85 のブログ'
 const appDescription = 'ブログ一覧'
 
@@ -12,7 +12,10 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: pkg.name,
+    title: appName,
+    htmlAttrs: {
+      lang: 'ja'
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
