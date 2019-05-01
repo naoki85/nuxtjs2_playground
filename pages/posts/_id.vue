@@ -9,6 +9,7 @@
     <div class="siimple-grid">
       <div class="siimple-grid-row">
         <TweetButton :text="post.title" :path="path" />
+        <HatebuButton :text="post.title" :path="path" />
       </div>
     </div>
 
@@ -22,6 +23,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import Post from '../../models/Post'
 import TweetButton from '../../components/tweetButton.vue'
+import HatebuButton from '../../components/hatebuButton.vue'
 declare function require(x: string): any
 const Request = require('../../assets/javascript/request.js').default
 const extMarked = require('../../assets/javascript/extMarked.js').default
@@ -31,7 +33,8 @@ const extMarked = require('../../assets/javascript/extMarked.js').default
     return /^\d+$/.test(params.id)
   },
   components: {
-    TweetButton
+    TweetButton,
+    HatebuButton
   }
 })
 export default class PostShowPage extends Vue {
