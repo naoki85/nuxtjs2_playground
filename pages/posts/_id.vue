@@ -16,6 +16,7 @@
     <div class="preview-area">
       <div v-html="convertMarkdownToHtml"></div>
     </div>
+    <RecommendedBooks />
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import Post from '../../models/Post'
 import TweetButton from '../../components/tweetButton.vue'
 import HatebuButton from '../../components/hatebuButton.vue'
+import RecommendedBooks from '../../components/recommendedBooks.vue'
 declare function require(x: string): any
 const Request = require('../../assets/javascript/request.js').default
 const extMarked = require('../../assets/javascript/extMarked.js').default
@@ -34,7 +36,8 @@ const extMarked = require('../../assets/javascript/extMarked.js').default
   },
   components: {
     TweetButton,
-    HatebuButton
+    HatebuButton,
+    RecommendedBooks
   }
 })
 export default class PostShowPage extends Vue {
