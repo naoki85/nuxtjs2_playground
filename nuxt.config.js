@@ -2,7 +2,7 @@ const environment = process.env.NODE_ENV || 'development'
 const envSet = require(`./env.${environment}.js`)
 // const pkg = require('./package')
 const appName = 'naoki85 のブログ'
-const appDescription = 'ブログ一覧'
+const appDescription = '本ブログは naoki85 によりメンテナンスされているサイトです。主に本の紹介や勉強したことをブログにまとめていきます。'
 
 module.exports = {
   mode: 'spa',
@@ -25,7 +25,10 @@ module.exports = {
       { hid: 'og:url', property: 'og:url', content: 'https://naoki85.me' },
       { hid: 'og:title', property: 'og:title', content: 'ブログ一覧' },
       { hid: 'og:description', property: 'og:description', content: appDescription },
-      { hid: 'og:image', property: 'og:image', href: '/favicon.ico' }
+      { hid: 'og:image', property: 'og:image', href: '/ogp.png' },
+      { hid: 'twitter:card', property: 'twitter:card', href: 'summary_large_image' },
+      { hid: 'twitter:site', property: 'twitter:site', href: '@tony_201612' },
+      { hid: 'twitter:creater', property: 'twitter:created', href: '@tony_201612' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
