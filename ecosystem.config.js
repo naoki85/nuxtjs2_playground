@@ -24,7 +24,7 @@ module.exports = {
       ref  : 'origin/master',
       repo : 'git@github.com:naoki85/my_blog_nuxt.git',
       path : '/home/naoki_yoneyama/my_blog_nuxt',
-      'post-deploy' : 'yarn install && yarn generate'
+      'post-deploy' : 'yarn install && yarn symlink-production && yarn generate'
     }
   }
 };
