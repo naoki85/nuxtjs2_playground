@@ -12,9 +12,9 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 @Component
 export default class TweetButton extends Vue {
   @Prop()
-  public text?: string = 'test'
+  public text?: string
   @Prop()
-  public path?: string = ''
+  public path?: string
 
   public tweet(): void {
     const text = this.text
