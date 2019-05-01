@@ -21,7 +21,7 @@ module.exports = {
     production : {
       user : 'naoki_yoneyama',
       host : '13.231.79.158',
-      ref  : 'origin/master',
+      ref  : 'origin/install-pm2',
       repo : 'git@github.com:naoki85/my_blog_nuxt.git',
       path : '/home/naoki_yoneyama/my_blog_nuxt',
       'post-deploy' : 'yarn install && yarn symlink-production && yarn generate'
