@@ -6,6 +6,11 @@
     <h1 class="siimple-h1">
       {{ post.title }}
     </h1>
+    <div class="siimple-grid">
+      <div class="siimple-grid-row">
+        <TweetButton :text="post.title" :path="path" />
+      </div>
+    </div>
 
     <div class="preview-area">
       <div v-html="convertMarkdownToHtml"></div>
@@ -16,6 +21,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Post from '../../models/Post'
+import TweetButton from '../../components/tweetButton.vue'
 declare function require(x: string): any
 const Request = require('../../assets/javascript/request.js').default
 const extMarked = require('../../assets/javascript/extMarked.js').default
@@ -23,6 +29,9 @@ const extMarked = require('../../assets/javascript/extMarked.js').default
 @Component({
   validate({ params }): boolean {
     return /^\d+$/.test(params.id)
+  },
+  components: {
+    TweetButton
   }
 })
 export default class PostShowPage extends Vue {
@@ -34,8 +43,10 @@ export default class PostShowPage extends Vue {
     publishedAt: '',
     postCategory: { id: 0, name: '', color: '' }
   }
+  path: string = ''
 
   public mounted(): void {
+    this.path = this.$route.path
     const postId = Number(this.$route.params.id)
     this.fetchPost(postId)
   }
