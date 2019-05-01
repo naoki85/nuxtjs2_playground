@@ -31,7 +31,8 @@ export default class PostShowPage extends Vue {
     title: '',
     content: '',
     imageUrl: '',
-    publishedAt: ''
+    publishedAt: '',
+    postCategory: { id: 0, name: '', color: '' }
   }
 
   public mounted(): void {
@@ -46,7 +47,7 @@ export default class PostShowPage extends Vue {
   public fetchPost(postId: number): void {
     Request.get('/posts/' + postId, {})
       .then((response: any) => {
-        const resPost: Object = response.data
+        const resPost: any = response.data
         this.post.id = resPost.Id
         this.post.title = resPost.Title
         this.post.content = resPost.Content

@@ -84,7 +84,7 @@ export default class IndexPage extends Vue {
         this.totalPage = response.data.TotalPage
         this.page = page
         this.posts = []
-        response.data.Posts.forEach((post: Object) => {
+        response.data.Posts.forEach((post: any) => {
           const newPostCategory: PostCategory = {
             id: post.PostCategory.Id,
             name: post.PostCategory.Name,
