@@ -84,4 +84,4 @@ dist
 sw.*
 
 # For cross-env
-env.*.js
+env.development.js
