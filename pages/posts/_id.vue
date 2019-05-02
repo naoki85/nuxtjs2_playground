@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
 import Post from '../../models/Post'
 import TweetButton from '../../components/tweetButton.vue'
 import HatebuButton from '../../components/hatebuButton.vue'
@@ -38,75 +38,57 @@ const extMarked = require('../../assets/javascript/extMarked.js').default
     TweetButton,
     HatebuButton,
     RecommendedBooks
+  },
+  async asyncData({ route }) {
+    const requestPath = route.path
+    const postId = Number(route.params.id)
+    const { data } = await Request.get('/posts/' + postId, {})
+    return {
+      post: {
+        id: data.Id,
+        title: data.Title,
+        content: data.Content,
+        imageUrl: data.ImageUrl,
+        publishedAt: data.PublishedAt
+      },
+      path: requestPath
+    }
   }
 })
 export default class PostShowPage extends Vue {
-  post: Post = {
-    id: 0,
-    title: '',
-    content: '',
-    imageUrl: '',
-    publishedAt: '',
-    postCategory: { id: 0, name: '', color: '' }
-  }
-  path: string = ''
+  public post!: Post
+  public path!: string
 
   public head() {
     return {
-      title: '記事詳細ページ',
+      title: this.post.title,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: '記事の詳細です'
+          content: this.post.content.replace(/\r?\n/g, '').slice(0, 160)
         },
         {
           hid: 'og:title',
           property: 'og:title',
-          content: '記事詳細ページ'
+          content: this.post.title
         },
         {
           hid: 'og:description',
           property: 'og:description',
-          content: '記事の詳細です'
+          content: this.post.content.replace(/\r?\n/g, '').slice(0, 160)
         },
         {
           hid: 'og:image',
           property: 'og:image',
-          href: '/favicon.ico'
+          href: this.post.imageUrl
         }
       ]
     }
   }
 
-  public mounted(): void {
-    this.path = this.$route.path
-    const postId = Number(this.$route.params.id)
-    this.fetchPost(postId)
-  }
-
   public get convertMarkdownToHtml(): string {
     return extMarked.convertToHtml(this.post.content)
-  }
-
-  public fetchPost(postId: number): void {
-    Request.get('/posts/' + postId, {})
-      .then((response: any) => {
-        const resPost: any = response.data
-        this.post.id = resPost.Id
-        this.post.title = resPost.Title
-        this.post.content = resPost.Content
-        this.post.publishedAt = resPost.PublishedAt
-      })
-      .catch((error: any) => {
-        console.log(error)
-        // TODO: https://medium.com/@mavrickmaster/custom-error-pages-with-nuxt-js-3c70e6c51aff
-        // const nuxtApp = this.$nuxt
-        // return nuxtApp.error({
-        //   statusCode: error.response.status,
-        //   message: error.response.message
-        // })
-      })
   }
 }
 </script>
