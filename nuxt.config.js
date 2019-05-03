@@ -2,7 +2,8 @@ const environment = process.env.NODE_ENV || 'development'
 const envSet = require(`./env.${environment}.js`)
 // const pkg = require('./package')
 const appName = 'naoki85 のブログ'
-const appDescription = '本ブログは naoki85 によりメンテナンスされているサイトです。主に本の紹介や勉強したことをブログにまとめていきます。'
+const appDescription =
+  '本ブログは naoki85 によりメンテナンスされているサイトです。主に本の紹介や勉強したことをブログにまとめていきます。'
 
 module.exports = {
   mode: 'universal',
@@ -24,11 +25,23 @@ module.exports = {
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:url', property: 'og:url', content: 'https://naoki85.me' },
       { hid: 'og:title', property: 'og:title', content: 'ブログ一覧' },
-      { hid: 'og:description', property: 'og:description', content: appDescription },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: appDescription
+      },
       { hid: 'og:image', property: 'og:image', href: '/ogp.png' },
-      { hid: 'twitter:card', property: 'twitter:card', href: 'summary_large_image' },
+      {
+        hid: 'twitter:card',
+        property: 'twitter:card',
+        href: 'summary_large_image'
+      },
       { hid: 'twitter:site', property: 'twitter:site', href: '@tony_201612' },
-      { hid: 'twitter:creater', property: 'twitter:created', href: '@tony_201612' }
+      {
+        hid: 'twitter:creater',
+        property: 'twitter:created',
+        href: '@tony_201612'
+      }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -53,7 +66,7 @@ module.exports = {
     '@fortawesome/fontawesome-free/css/all.css',
     '~/assets/style/app.styl',
     'highlight.js/styles/github-gist.css',
-    '~/assets/style/parse_markdown.scss',
+    '~/assets/style/parse_markdown.scss'
   ],
 
   /*
