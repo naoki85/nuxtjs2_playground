@@ -1,3 +1,4 @@
+const axios = require('axios')
 const environment = process.env.NODE_ENV || 'development'
 const envSet = require(`./env.${environment}.js`)
 // const pkg = require('./package')
@@ -78,15 +79,33 @@ module.exports = {
    ** Nuxt.js modules
    */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    '@nuxtjs/pwa'
+    '@nuxtjs/axios'
+    // '@nuxtjs/pwa'
   ],
   /*
    ** Axios module configuration
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+  },
+  /*
+   ** Generate configuration
+   */
+  generate: {
+    fallback: true,
+    routes: function() {
+      return axios
+        .get('http://api.naoki85.me/posts')
+        .then(response => {
+          return response.data.Posts.map(post => {
+            return {
+              route: `posts/${post.Id}`,
+              payload: post
+            }
+          })
+        })
+        .catch(error => console.log(error))
+    }
   },
 
   /*
@@ -100,6 +119,7 @@ module.exports = {
         import: []
       }
     },
+    extractCSS: true,
 
     /*
      ** You can extend webpack config here

@@ -39,17 +39,26 @@ const extMarked = require('../../assets/javascript/extMarked.js').default
     HatebuButton,
     RecommendedBooks
   },
-  async asyncData({ route }) {
-    const requestPath = route.path
-    const postId = Number(route.params.id)
-    const { data } = await Request.get('/posts/' + postId, {})
+  async asyncData({ route, payload }) {
+    let postData: any
+    let requestPath: string
+
+    if (payload) {
+      postData = payload
+      requestPath = '/posts/' + postData.Id
+    } else {
+      requestPath = route.path
+      const postId = Number(route.params.id)
+      const { data } = await Request.get('/posts/' + postId, {})
+      postData = data
+    }
     return {
       post: {
-        id: data.Id,
-        title: data.Title,
-        content: data.Content,
-        imageUrl: data.ImageUrl,
-        publishedAt: data.PublishedAt
+        id: postData.Id,
+        title: postData.Title,
+        content: postData.Content,
+        imageUrl: postData.ImageUrl,
+        publishedAt: postData.PublishedAt
       },
       path: requestPath
     }
@@ -66,7 +75,9 @@ export default class PostShowPage extends Vue {
         {
           hid: 'description',
           name: 'description',
-          content: this.post.content.replace(/\r?\n/g, '').slice(0, 160)
+          content: this.post.content
+            ? this.post.content.replace(/\r?\n/g, '').slice(0, 160)
+            : ''
         },
         {
           hid: 'og:title',
@@ -76,7 +87,9 @@ export default class PostShowPage extends Vue {
         {
           hid: 'og:description',
           property: 'og:description',
-          content: this.post.content.replace(/\r?\n/g, '').slice(0, 160)
+          content: this.post.content
+            ? this.post.content.replace(/\r?\n/g, '').slice(0, 160)
+            : ''
         },
         {
           hid: 'og:image',
