@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="describe-page">
     <div class="body-1 grey--text">
       {{ post.publishedAt }}
     </div>
@@ -110,7 +110,22 @@ export default class PostShowPage extends Vue {
 .siimple-h1 {
   font-size: 34px;
 }
-.preview-area {
+.preview-area,
+.describe-page {
   width: 100%;
+}
+@media (min-width: 768px) {
+  .describe-page {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media (min-width: 960px) {
+  .describe-page {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 </style>
