@@ -107,7 +107,7 @@ li {
   background: #c9dec8;
 }
 .paginate li.current {
-  background: rgb(0, 209, 178);
+  background: #009688;
   color: #fff;
 }
 </style>
