@@ -85,3 +85,7 @@ sw.*
 
 # For cross-env
 env.development.js
+
+# Deploy Script
+.awspublish
+deploy.sh
