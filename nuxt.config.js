@@ -95,7 +95,7 @@ module.exports = {
     fallback: true,
     routes: function() {
       return axios
-        .get('http://api.naoki85.me/posts')
+        .get('https://api.naoki85.me/all_posts')
         .then(response => {
           return response.data.Posts.map(post => {
             return {
