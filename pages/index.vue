@@ -128,6 +128,7 @@ export default class IndexPage extends Vue {
   color: white;
 }
 .siimple-box-detail {
+  overflow: hidden;
   opacity: 1;
   height: 125px;
 }
