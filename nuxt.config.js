@@ -21,6 +21,10 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        name: 'google-site-verification',
+        content: 'Pbq8QL4T0w9Z9RazHVPFWBvb3FsPgH76gLfa28NpgVI'
+      },
       { hid: 'description', name: 'description', content: appDescription },
       { hid: 'og:site_name', property: 'og:site_name', content: appName },
       { hid: 'og:type', property: 'og:type', content: 'website' },
