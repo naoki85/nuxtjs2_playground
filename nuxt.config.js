@@ -133,8 +133,6 @@ module.exports = {
         import: []
       }
     },
-    extractCSS: true,
-
     /*
      ** You can extend webpack config here
      */
