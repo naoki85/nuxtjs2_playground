@@ -79,7 +79,8 @@ module.exports = {
    ** Nuxt.js modules
    */
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/sitemap'
     // '@nuxtjs/pwa'
   ],
   /*
@@ -107,7 +108,19 @@ module.exports = {
         .catch(error => console.log(error))
     }
   },
-
+  /**
+   * Sitemap Configuration
+   */
+  sitemap: {
+    hostname: 'https://blog.naoki85.me',
+    routes: function() {
+      return axios.get('https://api.naoki85.me/all_posts').then(response => {
+        return response.data.Posts.map(post => {
+          return `/posts/${post.Id}`
+        })
+      })
+    }
+  },
   /*
    ** Build configuration
    */
