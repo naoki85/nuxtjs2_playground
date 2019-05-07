@@ -85,6 +85,7 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/sitemap',
+    '@nuxtjs/feed',
     ['@nuxtjs/google-analytics', { id: 'UA-123372116-2' }]
     // '@nuxtjs/pwa'
   ],
@@ -94,6 +95,37 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
+  /**
+   * RSS Feed Generator
+   */
+  feed: [
+    {
+      path: '/feed.xml',
+      async create(feed) {
+        feed.options = {
+          title: appName,
+          link: 'https://blog.naoki85.me/feed.xml',
+          description: appDescription
+        }
+        const response = await axios.get('https://api.naoki85.me/all_posts')
+        response.data.Posts.forEach(post => {
+          feed.addItem({
+            title: post.title,
+            id: post.Id,
+            link: `https://blog.naoki85.me/posts/${post.Id}`,
+            description: post.description
+          })
+        })
+        feed.addContributor({
+          name: 'naoki85',
+          email: 'naoki.yoneyama.85@gmail.com',
+          link: 'https://blog.naoki85.me'
+        })
+      },
+      cacheTime: 1000 * 60 * 15,
+      type: 'rss2'
+    }
+  ],
   /*
    ** Generate configuration
    */
