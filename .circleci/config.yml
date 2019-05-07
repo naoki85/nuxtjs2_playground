@@ -1,9 +1,6 @@
 version: 2
 jobs:
   build:
-    branches:
-      only:
-        - master
     docker:
       - image: circleci/node:10-stretch-browsers
 
@@ -44,7 +41,11 @@ workflows:
   version: 2
   normal_workflow:
     jobs:
-      - build
+      - build:
+        filters:
+          branches:
+            only:
+              - master
   schedule_workflow:
     triggers:
       - schedule:
