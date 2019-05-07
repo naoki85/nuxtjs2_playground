@@ -118,6 +118,7 @@
     color: #42b983;
   }
   ul {
+    padding-inline-start: 20px;
     margin-bottom: 20px;
     li {
       margin-left: 1.5em;
@@ -129,6 +130,7 @@
     margin-left: 0.5em;
   }
   .ogp-card {
+    padding: 10px;
     border: 2px solid #eef2f7;
     border-radius: 4px;
     max-width: 600px;
