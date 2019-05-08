@@ -37,6 +37,7 @@ jobs:
       - run:
           name: Deploy
           command: yarn run gulp deploy
+          no_output_timeout: 15m
 workflows:
   version: 2
   normal_workflow:
