@@ -42,10 +42,10 @@ workflows:
   normal_workflow:
     jobs:
       - build:
-        filters:
-          branches:
-            only:
-              - master
+          filters:
+            branches:
+              only:
+                - master
   schedule_workflow:
     triggers:
       - schedule:
