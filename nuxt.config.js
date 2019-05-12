@@ -35,17 +35,21 @@ module.exports = {
         property: 'og:description',
         content: appDescription
       },
-      { hid: 'og:image', property: 'og:image', href: '/ogp.png' },
+      { hid: 'og:image', property: 'og:image', content: '/ogp.png' },
       {
         hid: 'twitter:card',
         property: 'twitter:card',
-        href: 'summary_large_image'
+        content: 'summary_large_image'
       },
-      { hid: 'twitter:site', property: 'twitter:site', href: '@tony_201612' },
+      {
+        hid: 'twitter:site',
+        property: 'twitter:site',
+        content: '@tony_201612'
+      },
       {
         hid: 'twitter:creater',
         property: 'twitter:created',
-        href: '@tony_201612'
+        content: '@tony_201612'
       }
     ],
     link: [

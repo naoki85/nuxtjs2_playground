@@ -94,7 +94,7 @@ export default class PostShowPage extends Vue {
         {
           hid: 'og:image',
           property: 'og:image',
-          href: this.post.imageUrl
+          content: this.post.imageUrl
         }
       ]
     }
