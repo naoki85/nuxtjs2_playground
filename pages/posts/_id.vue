@@ -95,6 +95,11 @@ export default class PostShowPage extends Vue {
           hid: 'og:image',
           property: 'og:image',
           content: this.post.imageUrl
+        },
+        {
+          hid: 'twitter:card',
+          property: 'twitter:card',
+          content: 'summary'
         }
       ]
     }
