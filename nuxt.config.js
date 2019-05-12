@@ -135,6 +135,7 @@ module.exports = {
    */
   generate: {
     fallback: true,
+    subFolders: false,
     routes: function() {
       return axios
         .get('https://api.naoki85.me/all_posts')
