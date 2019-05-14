@@ -18,7 +18,7 @@ export default class TweetButton extends Vue {
 
   public tweet(): void {
     const text = this.text
-    const url = 'https://naoki85.me' + this.path
+    const url = 'https://blog.naoki85.me' + this.path + '.html'
     const redirectUrl = 'https://twitter.com/share'
     location.href = redirectUrl + '?text=' + text + '&url=' + url
   }

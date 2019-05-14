@@ -18,7 +18,7 @@ export default class HatebuButton extends Vue {
 
   public bookmark(): void {
     const text = this.text
-    const url = 'https://naoki85.me' + this.path
+    const url = 'https://blog.naoki85.me' + this.path + '.html'
     const redirectUrl = 'http://b.hatena.ne.jp/add?mode=confirm'
     location.href =
       redirectUrl +
