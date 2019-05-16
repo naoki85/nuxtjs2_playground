@@ -158,7 +158,7 @@ module.exports = {
     routes: function() {
       return axios.get('https://api.naoki85.me/all_posts').then(response => {
         return response.data.Posts.map(post => {
-          return `/posts/${post.Id}`
+          return `/posts/${post.Id}.html`
         })
       })
     }
