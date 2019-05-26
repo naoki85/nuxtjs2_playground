@@ -2,7 +2,7 @@
   <div>
     <div class="siimple-navbar siimple-navbar--teal siimple-navbar--fluid">
       <router-link to="/" class="siimple-navbar-title">
-        naoki85 のブログ
+        naoki85.me
       </router-link>
     </div>
     <div class="siimple-content siimple-content--fluid">
@@ -14,8 +14,8 @@
           <div
             class="siimple-grid-col siimple-grid-col--10 siimple-grid-col--sm-12"
           >
-            本ブログは naoki85 によってメンテナンスされています。<br />
-            Twitter などでご意見いただけると嬉しいです。
+            This blog is maintained by naoki85.<br />
+            I would be glad if you could give me an opinion on Twitter etc.
           </div>
           <div
             class="siimple-grid-col siimple-grid-col--2 siimple-grid-col--sm-12"
