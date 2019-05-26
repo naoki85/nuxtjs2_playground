@@ -90,9 +90,21 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/sitemap',
     '@nuxtjs/feed',
-    ['@nuxtjs/google-analytics', { id: 'UA-123372116-2' }]
-    // '@nuxtjs/pwa'
+    ['@nuxtjs/google-analytics', { id: 'UA-123372116-2' }],
+    '@nuxtjs/pwa'
   ],
+  /*
+   ** PWA manifest
+   */
+  workbox: {
+    runtimeCaching: [
+      {
+        urlPattern: 'https://d29xhtkvbwm2ne.cloudfront.net/',
+        handler: 'cacheFirst',
+        method: 'GET'
+      }
+    ]
+  },
   /*
    ** Axios module configuration
    */
