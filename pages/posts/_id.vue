@@ -1,19 +1,22 @@
 <template>
   <div class="describe-page">
-    <div class="body-1 grey--text">
+    <div v-if="isError">
+      Some error is occured. Please reload after a later.
+    </div>
+    <div v-if="!isError" class="body-1 grey--text">
       {{ post.publishedAt }}
     </div>
-    <h1 class="siimple-h1">
+    <h1 v-if="!isError" class="siimple-h1">
       {{ post.title }}
     </h1>
-    <div class="siimple-grid">
+    <div v-if="!isError" class="siimple-grid">
       <div class="siimple-grid-row">
         <TweetButton :text="post.title" :path="path" />
         <HatebuButton :text="post.title" :path="path" />
       </div>
     </div>
 
-    <div class="preview-area">
+    <div v-if="!isError" class="preview-area">
       <div v-html="convertMarkdownToHtml"></div>
     </div>
     <RecommendedBooks />
@@ -49,8 +52,15 @@ const extMarked = require('../../assets/javascript/extMarked.js').default
     } else {
       requestPath = route.path
       const postId = Number(route.params.id)
-      const { data } = await Request.get('/posts/' + postId, {})
-      postData = data
+      try {
+        const { data } = await Request.get('/posts/' + postId, {})
+        postData = data
+      } catch (e) {
+        return {
+          post: {},
+          isError: true
+        }
+      }
     }
     return {
       post: {
@@ -60,13 +70,15 @@ const extMarked = require('../../assets/javascript/extMarked.js').default
         imageUrl: postData.ImageUrl,
         publishedAt: postData.PublishedAt
       },
-      path: requestPath
+      path: requestPath,
+      isError: false
     }
   }
 })
 export default class PostShowPage extends Vue {
   public post!: Post
   public path!: string
+  public isError!: bool
 
   public head() {
     return {

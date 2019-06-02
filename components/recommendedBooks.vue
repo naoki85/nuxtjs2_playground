@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div v-if="!isError">
     <h3 class="siimple-h3">
-      最近読んだ本
+      Recently read
     </h3>
     <div class="siimple-grid">
       <div class="siimple-grid-row">
@@ -36,6 +36,7 @@ const Request = require('../assets/javascript/request.js').default
 @Component
 export default class RecommendBooks extends Vue {
   recommendedBooks: RecommendedBook[] = []
+  isError: bool = false
 
   public mounted(): void {
     this.fetchRecommededBooks()
@@ -55,8 +56,8 @@ export default class RecommendBooks extends Vue {
           this.recommendedBooks.push(newBook)
         })
       })
-      .catch((error: any) => {
-        console.log(error)
+      .catch(() => {
+        this.isError = true
       })
   }
 }

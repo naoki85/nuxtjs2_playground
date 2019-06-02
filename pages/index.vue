@@ -6,6 +6,9 @@
       :total-page="totalPage"
       @click-page="fetchPosts"
     />
+    <div v-if="isError">
+      Some error is occured. Please reload after a later.
+    </div>
     <div class="siimple-grid">
       <div class="siimple-grid-row">
         <div
@@ -66,6 +69,7 @@ export default class IndexPage extends Vue {
   posts: Post[] = []
   totalPage: number = 0
   page: number = 1
+  isError: bool = false
 
   @Watch('page')
   public currentPage(): void {
@@ -101,8 +105,8 @@ export default class IndexPage extends Vue {
           this.posts.push(newPost)
         })
       })
-      .catch((error: any) => {
-        console.log(error)
+      .catch(() => {
+        this.isError = true
       })
   }
 }
