@@ -30,8 +30,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import RecommendedBook from '../models/RecommendedBook'
-declare function require(x: string): any
-const Request = require('../assets/javascript/request.js').default
 
 @Component
 export default class RecommendBooks extends Vue {
@@ -42,23 +40,22 @@ export default class RecommendBooks extends Vue {
     this.fetchRecommededBooks()
   }
 
-  public fetchRecommededBooks(): void {
-    Request.get('/recommended_books', {})
-      .then((response: any) => {
-        this.recommendedBooks = []
-        response.data.RecommendedBooks.forEach((book: any) => {
-          const newBook: RecommendedBook = {
-            id: book.Id,
-            link: book.Link,
-            imageUrl: book.ImageUrl,
-            buttonUrl: book.ButtonUrl
-          }
-          this.recommendedBooks.push(newBook)
-        })
+  async fetchRecommededBooks(): void {
+    try {
+      const response: any = await this.$axios.$get('/recommended_books')
+      this.recommendedBooks = []
+      response.RecommendedBooks.forEach((book: any) => {
+        const newBook: RecommendedBook = {
+          id: book.Id,
+          link: book.Link,
+          imageUrl: book.ImageUrl,
+          buttonUrl: book.ButtonUrl
+        }
+        this.recommendedBooks.push(newBook)
       })
-      .catch(() => {
-        this.isError = true
-      })
+    } catch (e) {
+      this.isError = true
+    }
   }
 }
 </script>

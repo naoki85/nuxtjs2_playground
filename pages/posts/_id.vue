@@ -30,7 +30,6 @@ import TweetButton from '../../components/tweetButton.vue'
 import HatebuButton from '../../components/hatebuButton.vue'
 import RecommendedBooks from '../../components/recommendedBooks.vue'
 declare function require(x: string): any
-const Request = require('../../assets/javascript/request.js').default
 const extMarked = require('../../assets/javascript/extMarked.js').default
 
 @Component({
@@ -42,7 +41,7 @@ const extMarked = require('../../assets/javascript/extMarked.js').default
     HatebuButton,
     RecommendedBooks
   },
-  async asyncData({ route, payload }) {
+  async asyncData({ route, payload, $axios }) {
     let postData: any
     let requestPath: string
 
@@ -53,8 +52,7 @@ const extMarked = require('../../assets/javascript/extMarked.js').default
       requestPath = route.path
       const postId = Number(route.params.id)
       try {
-        const { data } = await Request.get('/posts/' + postId, {})
-        postData = data
+        postData = await $axios.$get('/posts/' + postId)
       } catch (e) {
         return {
           post: {},

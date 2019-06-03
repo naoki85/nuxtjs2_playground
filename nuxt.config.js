@@ -5,6 +5,7 @@ const envSet = require(`./env.${environment}.js`)
 const appName = 'naoki85 のブログ'
 const appDescription =
   '本ブログは naoki85 によりメンテナンスされているサイトです。主に本の紹介や勉強したことをブログにまとめていきます。'
+const apiBaseURL = envSet.apiBaseUrl
 
 module.exports = {
   mode: 'universal',
@@ -109,7 +110,7 @@ module.exports = {
    ** Axios module configuration
    */
   axios: {
-    // See https://github.com/nuxt-community/axios-module#options
+    baseURL: apiBaseURL || 'http://localhost:8080'
   },
   /**
    * RSS Feed Generator

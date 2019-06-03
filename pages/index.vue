@@ -57,8 +57,6 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import Post from '../models/Post'
 import PostCategory from '../models/PostCategory'
-declare function require(x: string): any
-const Request = require('../assets/javascript/request.js').default
 
 @Component({
   components: {
@@ -81,33 +79,32 @@ export default class IndexPage extends Vue {
     this.fetchPosts(1)
   }
 
-  public fetchPosts(page: number): void {
+  async fetchPosts(page: number): void {
     const requestPage = page === undefined ? 1 : page
-    Request.get('/posts?page=' + requestPage, {})
-      .then((response: any) => {
-        this.totalPage = response.data.TotalPage
-        this.page = page
-        this.posts = []
-        response.data.Posts.forEach((post: any) => {
-          const newPostCategory: PostCategory = {
-            id: post.PostCategory.Id,
-            name: post.PostCategory.Name,
-            color: post.PostCategory.Color
-          }
-          const newPost: Post = {
-            id: post.Id,
-            title: post.Title,
-            content: post.Content,
-            imageUrl: post.ImageUrl,
-            publishedAt: post.PublishedAt,
-            postCategory: newPostCategory
-          }
-          this.posts.push(newPost)
-        })
+    try {
+      const response: any = await this.$axios.$get('/posts?page=' + requestPage)
+      this.totalPage = response.TotalPage
+      this.page = page
+      this.posts = []
+      response.Posts.forEach((post: any) => {
+        const newPostCategory: PostCategory = {
+          id: post.PostCategory.Id,
+          name: post.PostCategory.Name,
+          color: post.PostCategory.Color
+        }
+        const newPost: Post = {
+          id: post.Id,
+          title: post.Title,
+          content: post.Content,
+          imageUrl: post.ImageUrl,
+          publishedAt: post.PublishedAt,
+          postCategory: newPostCategory
+        }
+        this.posts.push(newPost)
       })
-      .catch(() => {
-        this.isError = true
-      })
+    } catch (e) {
+      this.isError = true
+    }
   }
 }
 </script>
