@@ -19,56 +19,55 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    currentPage: {
-      type: Number,
-      default: 1
-    },
-    totalPage: {
-      type: Number,
-      default: 0
+<script lang="ts">
+import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
+
+@Component
+export default class Paginate extends Vue {
+  @Prop({ type: Number })
+  currentPage: Number = 1
+  @Prop({ type: Number })
+  totalPage: Number = 0
+
+  @Emit()
+  clickPage(page: number) {}
+
+  public get displayPages(): number {
+    if (this.totalPage && this.totalPage <= 5) {
+      return this.totalPage
     }
-  },
-  computed: {
-    displayPages: function() {
-      if (this.totalPage && this.totalPage <= 5) {
-        return this.totalPage
-      }
-      if (this.currentPage - 3 <= 0) {
-        return 5
-      }
-      const tmpPages = []
-      const iterater = [-2, -1, 0, 1, 2]
-      iterater.forEach(i => {
-        const tmpPage = this.currentPage + i
-        if (tmpPage > this.totalPage) {
-          return true
-        }
-        tmpPages.push(tmpPage)
-      })
-      return tmpPages
+    if (this.currentPage - 3 <= 0) {
+      return 5
     }
-  },
-  methods: {
-    isCurrent: function(page) {
-      const defaultClass = 'page-' + page
-      return page === this.currentPage
-        ? defaultClass + ' current'
-        : defaultClass
-    },
-    emitClickPage(page) {
-      this.$emit('click-page', page)
-    },
-    updateCurrent(page) {
-      const currentClassElements = document.getElementsByClassName('current')
-      if (currentClassElements.length > 0) {
-        currentClassElements[0].classList.remove('current')
-        document
-          .getElementsByClassName('page-' + page)[0]
-          .classList.add('current')
+    const tmpPages: array = []
+    const iterater: array = [-2, -1, 0, 1, 2]
+    iterater.forEach(i => {
+      const tmpPage = this.currentPage + i
+      if (tmpPage > this.totalPage) {
+        return true
       }
+      tmpPages.push(tmpPage)
+    })
+    return tmpPages
+  }
+
+  public isCurrent(page: number): bool {
+    const defaultClass: string = 'page-' + page
+    return page === this.currentPage ? defaultClass + ' current' : defaultClass
+  }
+
+  public emitClickPage(page: number): void {
+    this.clickPage(page)
+  }
+  public updateCurrent(page: number): void {
+    const currentClassElements: array = document.getElementsByClassName(
+      'current'
+    )
+    if (currentClassElements.length > 0) {
+      currentClassElements[0].classList.remove('current')
+      document
+        .getElementsByClassName('page-' + page)[0]
+        .classList.add('current')
     }
   }
 }
