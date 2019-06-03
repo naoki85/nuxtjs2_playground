@@ -1,13 +1,13 @@
-import marked from 'marked'
-import hljs from 'highlight.js'
+const marked = require('marked')
+const hljs = require('highlight.js')
 
 export default {
-  convertToHtml: function(content) {
+  convertToHtml: function(content: string) {
     if (!content) return ''
 
     const renderer = new marked.Renderer()
     renderer.langPrefix = ''
-    renderer.code = function(code, lang) {
+    renderer.code = function(code: string, lang: string) {
       return (
         '<pre><code class="' +
         lang +

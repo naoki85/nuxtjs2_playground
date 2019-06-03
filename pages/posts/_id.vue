@@ -29,8 +29,7 @@ import Post from '../../models/Post'
 import TweetButton from '../../components/tweetButton.vue'
 import HatebuButton from '../../components/hatebuButton.vue'
 import RecommendedBooks from '../../components/recommendedBooks.vue'
-declare function require(x: string): any
-const extMarked = require('../../assets/javascript/extMarked.js').default
+import extMarked from '../../plugins/extMarked.ts'
 
 @Component({
   validate({ params }): boolean {
