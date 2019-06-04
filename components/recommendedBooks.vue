@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div v-if="!isError">
     <h3 class="siimple-h3">
-      最近読んだ本
+      Recently read
     </h3>
     <div class="siimple-grid">
       <div class="siimple-grid-row">
@@ -30,34 +30,32 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import RecommendedBook from '../models/RecommendedBook'
-declare function require(x: string): any
-const Request = require('../assets/javascript/request.js').default
 
 @Component
 export default class RecommendBooks extends Vue {
   recommendedBooks: RecommendedBook[] = []
+  isError: bool = false
 
   public mounted(): void {
     this.fetchRecommededBooks()
   }
 
-  public fetchRecommededBooks(): void {
-    Request.get('/recommended_books', {})
-      .then((response: any) => {
-        this.recommendedBooks = []
-        response.data.RecommendedBooks.forEach((book: any) => {
-          const newBook: RecommendedBook = {
-            id: book.Id,
-            link: book.Link,
-            imageUrl: book.ImageUrl,
-            buttonUrl: book.ButtonUrl
-          }
-          this.recommendedBooks.push(newBook)
-        })
+  async fetchRecommededBooks(): void {
+    try {
+      const response: any = await this.$axios.$get('/recommended_books')
+      this.recommendedBooks = []
+      response.RecommendedBooks.forEach((book: any) => {
+        const newBook: RecommendedBook = {
+          id: book.Id,
+          link: book.Link,
+          imageUrl: book.ImageUrl,
+          buttonUrl: book.ButtonUrl
+        }
+        this.recommendedBooks.push(newBook)
       })
-      .catch((error: any) => {
-        console.log(error)
-      })
+    } catch (e) {
+      this.isError = true
+    }
   }
 }
 </script>
