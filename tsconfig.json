@@ -13,4 +13,13 @@
     "experimentalDecorators": true,
     "allowJs": true
   },
+  "exclude": [
+    "nuxt.config.js",
+    "node_modules",
+    "dist",
+    "ecosystem.config.js",
+    "env.*.js",
+    "gulpfile.js",
+    "jest.config.js"
+  ]
 }

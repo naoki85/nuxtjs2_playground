@@ -106,12 +106,6 @@ module.exports = {
       }
     ]
   },
-  /*
-   ** Axios module configuration
-   */
-  axios: {
-    baseURL: apiBaseURL || 'http://localhost:8080'
-  },
   /**
    * RSS Feed Generator
    */
