@@ -30,21 +30,22 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import RecommendedBook from '../models/RecommendedBook'
+import request from '../plugins/request'
 
 @Component
 export default class RecommendBooks extends Vue {
   recommendedBooks: RecommendedBook[] = []
-  isError: bool = false
+  isError: boolean = false
 
-  public mounted(): void {
+  public mounted() {
     this.fetchRecommededBooks()
   }
 
-  async fetchRecommededBooks(): void {
+  async fetchRecommededBooks() {
     try {
-      const response: any = await this.$axios.$get('/recommended_books')
+      const response: any = await request.get('/recommended_books', {})
       this.recommendedBooks = []
-      response.RecommendedBooks.forEach((book: any) => {
+      response.data.RecommendedBooks.forEach((book: any) => {
         const newBook: RecommendedBook = {
           id: book.Id,
           link: book.Link,

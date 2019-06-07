@@ -21,28 +21,29 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
+import { range } from '../plugins/utils'
 
 @Component
 export default class Paginate extends Vue {
   @Prop({ type: Number })
-  currentPage: Number = 1
+  currentPage: number = 1
   @Prop({ type: Number })
-  totalPage: Number = 0
+  totalPage: number = 0
 
   @Emit()
   clickPage(page: number) {}
 
-  public get displayPages(): number {
+  public get displayPages(): number[] {
     if (this.totalPage && this.totalPage <= 5) {
-      return this.totalPage
+      return range(1, this.totalPage)
     }
     if (this.currentPage - 3 <= 0) {
-      return 5
+      return range(1, 5)
     }
-    const tmpPages: array = []
-    const iterater: array = [-2, -1, 0, 1, 2]
-    iterater.forEach(i => {
-      const tmpPage = this.currentPage + i
+    const tmpPages: number[] = []
+    const iterater: number[] = [-2, -1, 0, 1, 2]
+    iterater.forEach((i: number) => {
+      const tmpPage: number = this.currentPage + i
       if (tmpPage > this.totalPage) {
         return true
       }
@@ -51,18 +52,18 @@ export default class Paginate extends Vue {
     return tmpPages
   }
 
-  public isCurrent(page: number): bool {
+  public isCurrent(page: number): string {
     const defaultClass: string = 'page-' + page
     return page === this.currentPage ? defaultClass + ' current' : defaultClass
   }
 
-  public emitClickPage(page: number): void {
+  public emitClickPage(page: number) {
     this.clickPage(page)
   }
-  public updateCurrent(page: number): void {
-    const currentClassElements: array = document.getElementsByClassName(
-      'current'
-    )
+  public updateCurrent(page: number) {
+    const currentClassElements: HTMLCollectionOf<
+      Element
+    > = document.getElementsByClassName('current')
     if (currentClassElements.length > 0) {
       currentClassElements[0].classList.remove('current')
       document

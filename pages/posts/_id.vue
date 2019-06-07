@@ -29,7 +29,8 @@ import Post from '../../models/Post'
 import TweetButton from '../../components/tweetButton.vue'
 import HatebuButton from '../../components/hatebuButton.vue'
 import RecommendedBooks from '../../components/recommendedBooks.vue'
-import extMarked from '../../plugins/extMarked.ts'
+import extMarked from '../../plugins/extMarked'
+import request from '../../plugins/request'
 
 @Component({
   validate({ params }): boolean {
@@ -40,7 +41,7 @@ import extMarked from '../../plugins/extMarked.ts'
     HatebuButton,
     RecommendedBooks
   },
-  async asyncData({ route, payload, $axios }) {
+  async asyncData({ route, payload }) {
     let postData: any
     let requestPath: string
 
@@ -51,7 +52,8 @@ import extMarked from '../../plugins/extMarked.ts'
       requestPath = route.path
       const postId = Number(route.params.id)
       try {
-        postData = await $axios.$get('/posts/' + postId)
+        const response: any = await request.get('/posts/' + postId, {})
+        postData = response.data
       } catch (e) {
         return {
           post: {},
@@ -75,7 +77,7 @@ import extMarked from '../../plugins/extMarked.ts'
 export default class PostShowPage extends Vue {
   public post!: Post
   public path!: string
-  public isError!: bool
+  public isError!: boolean
 
   public head() {
     return {

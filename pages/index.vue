@@ -57,6 +57,7 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import Post from '../models/Post'
 import PostCategory from '../models/PostCategory'
+import request from '../plugins/request'
 
 @Component({
   components: {
@@ -67,26 +68,26 @@ export default class IndexPage extends Vue {
   posts: Post[] = []
   totalPage: number = 0
   page: number = 1
-  isError: bool = false
+  isError: boolean = false
 
   @Watch('page')
-  public currentPage(): void {
+  public currentPage() {
     const paginateRef: any = this.$refs.paginate
     paginateRef.updateCurrent(this.page)
   }
 
-  public mounted(): void {
+  public mounted() {
     this.fetchPosts(1)
   }
 
-  async fetchPosts(page: number): void {
+  async fetchPosts(page: number) {
     const requestPage = page === undefined ? 1 : page
     try {
-      const response: any = await this.$axios.$get('/posts?page=' + requestPage)
-      this.totalPage = response.TotalPage
+      const response: any = await request.get('/posts?page=' + requestPage, {})
+      this.totalPage = response.data.TotalPage
       this.page = page
       this.posts = []
-      response.Posts.forEach((post: any) => {
+      response.data.Posts.forEach((post: any) => {
         const newPostCategory: PostCategory = {
           id: post.PostCategory.Id,
           name: post.PostCategory.Name,
