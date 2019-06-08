@@ -24,7 +24,7 @@ const puppeteer = require('puppeteer');
 
     const dateElement = await page.$('div.body-1.grey--text');
     const dateText = await page.evaluate(element => element.textContent, dateElement);
-    const pattern = /\d{4}-\d{2}-\d{2}/g;
+    const pattern = /\d{5}-\d{2}-\d{2}/g;
     const result = dateText.match(pattern);
     if (!result) {
       throw "No dateText";
