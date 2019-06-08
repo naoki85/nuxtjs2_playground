@@ -31,14 +31,18 @@ jobs:
       #     name: run tests
       #     command: yarn test
 
-      - run:
-          name: Generate asset files
-          command: yarn generate
+      # - run:
+      #     name: Generate asset files
+      #     command: yarn generate
+
+      # - run:
+      #     name: Deploy
+      #     command: yarn run gulp deploy
+      #     no_output_timeout: 15m
 
       - run:
-          name: Deploy
-          command: yarn run gulp deploy
-          no_output_timeout: 15m
+          name: Check my site
+          command: node server/scraper.js
 workflows:
   version: 2
   normal_workflow:
