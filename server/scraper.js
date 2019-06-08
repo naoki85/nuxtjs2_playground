@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 const puppeteer = require('puppeteer');
 
 (async () => {
@@ -14,7 +15,7 @@ const puppeteer = require('puppeteer');
     ]);
     const title = await page.$x('//a[contains(text(),"naoki85.me")]');
     if (title.length === 0) {
-      throw "Error occured";
+      throw new Error('Error occured');
     }
 
     await Promise.all([
@@ -24,16 +25,16 @@ const puppeteer = require('puppeteer');
 
     const dateElement = await page.$('div.body-1.grey--text');
     const dateText = await page.evaluate(element => element.textContent, dateElement);
-    const pattern = /\d{5}-\d{2}-\d{2}/g;
+    const pattern = /\d{4}-\d{2}-\d{2}/g;
     const result = dateText.match(pattern);
     if (!result) {
-      throw "No dateText";
+      throw new Error('No dateText');
     }
 
     return true;
   } catch (error) {
     console.log(error);
-    throw 'Test failed!!';
+    process.exit(1);
   } finally {
     await browser.close();
   }

@@ -31,14 +31,18 @@ jobs:
       #     name: run tests
       #     command: yarn test
 
-      # - run:
-      #     name: Generate asset files
-      #     command: yarn generate
+      - run:
+          name: Generate asset files
+          command: yarn generate
 
-      # - run:
-      #     name: Deploy
-      #     command: yarn run gulp deploy
-      #     no_output_timeout: 15m
+      - run:
+          name: Deploy
+          command: yarn run gulp deploy
+          no_output_timeout: 15m
+
+      - run:
+          name: Copy
+          command: cp /home/circleci/project/my_blog_nuxt/server/scraper.js /home/circleci/repo/server/scraper.js
 
       - run:
           name: Check my site
