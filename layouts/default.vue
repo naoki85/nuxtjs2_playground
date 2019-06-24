@@ -4,6 +4,11 @@
       <router-link to="/" class="siimple-navbar-title">
         naoki85.me
       </router-link>
+      <div class="siimple--float-right">
+        <router-link to="/books" class="siimple-navbar-item">
+          Books
+        </router-link>
+      </div>
     </div>
     <div class="siimple-content siimple-content--fluid">
       <nuxt />
@@ -39,5 +44,8 @@
 .fa-large {
   font-size: 36px;
   color: white;
+}
+.siimple-navbar-item:hover {
+  text-decoration: underline;
 }
 </style>

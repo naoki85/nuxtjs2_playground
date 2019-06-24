@@ -132,6 +132,11 @@ module.exports = {
           email: 'naoki.yoneyama.85@gmail.com',
           link: 'https://blog.naoki85.me'
         })
+        feed.addItem({
+          title: 'オススメの本　| naoki85 のブログ',
+          link: 'https://blog.naoki85.me/books',
+          description: '私が読んだ本の中でオススメの本を紹介しています。'
+        })
       },
       cacheTime: 1000 * 60 * 15,
       type: 'rss2'
@@ -143,8 +148,9 @@ module.exports = {
   generate: {
     fallback: true,
     subFolders: false,
-    routes: function() {
-      return axios
+    routes: async function() {
+      let routePath = []
+      const postsPath = await axios
         .get('https://api.naoki85.me/all_posts')
         .then(response => {
           return response.data.Posts.map(post => {
@@ -155,6 +161,18 @@ module.exports = {
           })
         })
         .catch(error => console.log(error))
+      routePath = routePath.concat(postsPath)
+      const booksPath = await axios
+        .get('https://api.naoki85.me/recommended_books')
+        .then(response => {
+          return {
+            route: 'books',
+            payload: response.data.RecommendedBooks
+          }
+        })
+        .catch(error => console.log(error))
+      routePath = routePath.concat(booksPath)
+      return routePath
     }
   },
   /**
@@ -162,12 +180,19 @@ module.exports = {
    */
   sitemap: {
     hostname: 'https://blog.naoki85.me',
-    routes: function() {
-      return axios.get('https://api.naoki85.me/all_posts').then(response => {
-        return response.data.Posts.map(post => {
-          return `/posts/${post.Id}.html`
+    routes: async function() {
+      let routePath = []
+      const postsPath = await axios
+        .get('https://api.naoki85.me/all_posts')
+        .then(response => {
+          return response.data.Posts.map(post => {
+            return `/posts/${post.Id}.html`
+          })
         })
-      })
+        .catch(error => console.log(error))
+      routePath = routePath.concat(postsPath)
+      routePath = routePath.concat(['/books'])
+      return routePath
     }
   },
   /*
