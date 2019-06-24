@@ -49,6 +49,7 @@ import request from '../../plugins/request'
       postData = payload
       requestPath = '/posts/' + postData.Id
     } else {
+      console.log('loading')
       requestPath = route.path
       const postId = Number(route.params.id)
       try {

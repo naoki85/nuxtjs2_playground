@@ -147,7 +147,6 @@ module.exports = {
    */
   generate: {
     fallback: true,
-    subFolders: false,
     routes: async function() {
       let routePath = []
       const postsPath = await axios
