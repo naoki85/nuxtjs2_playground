@@ -205,6 +205,7 @@ module.exports = {
         import: []
       }
     },
+    publicPath: 'https://blog.naoki85.me/',
     /*
      ** You can extend webpack config here
      */
