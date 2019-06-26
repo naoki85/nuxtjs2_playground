@@ -69,6 +69,19 @@ module.exports = {
   loading: { color: '#fff' },
 
   /*
+   ** Router Customize
+   */
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        path: '/posts/:id/index.html',
+        alias: '/posts/:id',
+        component: resolve(__dirname, 'pages/posts/_id.vue')
+      })
+    }
+  },
+
+  /*
    ** Global CSS
    */
   css: [

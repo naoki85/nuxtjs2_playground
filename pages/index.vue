@@ -16,7 +16,7 @@
           :key="post.id"
           class="siimple-box siimple-grid-col siimple-grid-col--6 siimple-grid-col--md-12"
         >
-          <router-link :to="'/posts/' + post.id">
+          <a :href="'/posts/' + post.id + '/index.html'">
             <div class="siimple-grid">
               <div class="siimple-grid-row">
                 <div class="siimple-grid-col siimple-grid-col--8">
@@ -40,7 +40,7 @@
                 </div>
               </div>
             </div>
-          </router-link>
+          </a>
         </div>
       </div>
     </div>
