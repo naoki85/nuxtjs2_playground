@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div
+      v-if="isLoading"
+      class="siimple-spinner siimple-spinner--teal loading"
+    />
     <v-paginate
       ref="paginate"
       :current-page="page"
@@ -69,6 +73,7 @@ export default class IndexPage extends Vue {
   totalPage: number = 0
   page: number = 1
   isError: boolean = false
+  isLoading: boolean = false
 
   @Watch('page')
   public currentPage() {
@@ -81,6 +86,7 @@ export default class IndexPage extends Vue {
   }
 
   async fetchPosts(page: number) {
+    this.isLoading = true
     const requestPage = page === undefined ? 1 : page
     try {
       const response: any = await request.get('/posts?page=' + requestPage, {})
@@ -103,6 +109,7 @@ export default class IndexPage extends Vue {
         }
         this.posts.push(newPost)
       })
+      this.isLoading = false
     } catch (e) {
       this.isError = true
     }
@@ -137,5 +144,10 @@ export default class IndexPage extends Vue {
 .siimple-box-detail img {
   width: 100%;
   height: auto;
+}
+.loading {
+  margin-right: auto;
+  margin-left: auto;
+  z-index: 100;
 }
 </style>
