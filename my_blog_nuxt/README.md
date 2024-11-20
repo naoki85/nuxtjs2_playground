@@ -28,3 +28,9 @@ $ npm run generate
 # Run test
 $ npm run test
 ```
+
+## Run mock API server
+
+```bash
+$ npm run json-server
+```
