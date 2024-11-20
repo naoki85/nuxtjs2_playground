@@ -85,7 +85,7 @@ feed.xml
 sw.*
 
 # For cross-env
-env.development.js
+# env.development.js
 
 # Deploy Script
 .awspublish

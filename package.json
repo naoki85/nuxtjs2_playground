@@ -57,13 +57,14 @@
     "gulp-awspublish": "^4.0.0",
     "gulp-cloudfront-invalidate-aws-publish": "^1.0.0",
     "jest": "^24.7.1",
-    "node-sass": "^4.12.0",
     "nodemon": "^1.18.11",
     "prettier": "1.17.0",
     "puppeteer": "^1.17.0",
-    "sass-loader": "^7.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vue-jest": "^3.0.4"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }

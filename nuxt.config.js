@@ -89,7 +89,7 @@ module.exports = {
     '@fortawesome/fontawesome-free/css/all.css',
     '~/assets/style/app.styl',
     'highlight.js/styles/github-gist.css',
-    '~/assets/style/parse_markdown.scss'
+    '~/assets/style/parse_markdown.css'
   ],
 
   /*
