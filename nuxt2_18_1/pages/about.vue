@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Hello Nuxters! 👋</h1>
+    <h1>About Page</h1>
     <p>
       This page is rendered on the <strong>{{ rendering }}</strong>
     </p>
@@ -15,7 +15,7 @@
       <li>Click the links to see client side rendering.</li>
     </ul>
 
-    <NuxtLink to="/about">About Page</NuxtLink>
+    <NuxtLink to="/">Home Page</NuxtLink>
   </div>
 </template>
 
