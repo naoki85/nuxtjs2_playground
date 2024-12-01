@@ -16,6 +16,12 @@
     </ul>
 
     <NuxtLink to="/about">About Page</NuxtLink>
+
+    <ul v-for="mountain in mountains" :key="mountain.id">
+      <NuxtLink :to="`${mountain.continent.toLowerCase()}/${mountain.slug}`">
+        <li>{{  mountain.title }}</li>
+      </NuxtLink>
+    </ul>
   </div>
 </template>
 
@@ -23,9 +29,12 @@
 import * as vue from 'vue'
 
 export default vue.defineComponent({
-  asyncData() {
+  async asyncData() {
+    const mountains = await fetch('http://localhost:3001/mountains').
+      then((res) => res.json())
     return {
-      rendering: process.server ? 'server' : 'client'
+      rendering: process.server ? 'server' : 'client',
+      mountains
     }
   }
 })
