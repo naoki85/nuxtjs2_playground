@@ -11,10 +11,9 @@
   import * as vue from 'vue'
 
   export default vue.defineComponent({
-    async asyncData({ params, redirect }) {
-      const mountains = await fetch('http://localhost:3001/mountains').
+    async asyncData({ params, redirect, $config: { apiBaseUrl } }) {
+      const mountains = await fetch(`${apiBaseUrl}/mountains`).
         then((res) => res.json())
-      console.log(mountains)
       const filteredMountain = mountains.find(
         (el) => el.continent.toLowerCase() === params.continent && el.slug === params.mountain
       )

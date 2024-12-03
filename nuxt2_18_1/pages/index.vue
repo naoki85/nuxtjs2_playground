@@ -29,8 +29,8 @@
 import * as vue from 'vue'
 
 export default vue.defineComponent({
-  async asyncData() {
-    const mountains = await fetch('http://localhost:3001/mountains').
+  async asyncData({ $config: { apiBaseUrl } }) {
+    const mountains = await fetch(`${apiBaseUrl}/mountains`).
       then((res) => res.json())
     return {
       rendering: process.server ? 'server' : 'client',

@@ -11,7 +11,6 @@
         <li>
           <NuxtLink to="/rivers">Rivers</NuxtLink>
         </li>
-  
       </ul>
     </nav>
     <main>
