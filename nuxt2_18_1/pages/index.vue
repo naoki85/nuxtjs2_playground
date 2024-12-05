@@ -17,10 +17,12 @@
 
     <NuxtLink to="/about">About Page</NuxtLink>
 
-    <ul v-for="mountain in mountains" :key="mountain.id">
-      <NuxtLink :to="`${mountain.continent.toLowerCase()}/${mountain.slug}`">
-        <li>{{  mountain.title }}</li>
-      </NuxtLink>
+    <ul>
+      <li v-for="mountain in mountains" :key="mountain.id">
+        <NuxtLink :to="{ name: 'mountains-slug', params: { slug: mountain.slug } }">
+          {{ mountain.title }}
+        </NuxtLink>
+      </li>
     </ul>
   </div>
 </template>
