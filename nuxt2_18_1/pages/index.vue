@@ -17,13 +17,7 @@
 
     <NuxtLink to="/about">About Page</NuxtLink>
 
-    <ul>
-      <li v-for="mountain in mountains" :key="mountain.id">
-        <NuxtLink :to="{ name: 'mountains-slug', params: { slug: mountain.slug } }">
-          {{ mountain.title }}
-        </NuxtLink>
-      </li>
-    </ul>
+    <Mountains />
   </div>
 </template>
 
