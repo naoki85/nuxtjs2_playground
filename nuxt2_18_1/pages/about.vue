@@ -27,6 +27,16 @@ export default vue.defineComponent({
     return {
       rendering: process.server ? 'server' : 'client'
     }
+  },
+  head: {
+    title: 'About page',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'About Nuxt'
+      }
+    ]
   }
 })
 </script>
